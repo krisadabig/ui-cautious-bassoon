@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="768" height="768" viewBox="0 0 768 768" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hands holding flame icon">
+  <!-- Orange background -->
+  <rect width="100%" height="100%" fill="#E9572A" rx="0" ry="0"/>
+
+  <!-- Stylized flame (center top) -->
+  <g transform="translate(256,140) scale(1.3)">
+    <path d="M128 16
+             C110 48,96 80,96 112
+             C96 160,144 176,160 224
+             C176 272,128 320,96 320
+             C64 320,16 272,32 224
+             C48 176,96 160,96 112
+             C96 80,84 56,64 36
+             C88 32,112 20,128 16 Z"
+          fill="#FFFFFF"/>
+    <path d="M128 48
+             C118 72,112 96,112 120
+             C112 150,136 160,144 192
+             C152 224,120 248,104 248
+             C88 248,56 224,64 192
+             C72 160,96 152,96 120
+             C96 96,92 80,80 64
+             C100 60,120 52,128 48 Z"
+          fill="#E9572A"/>
+  </g>
+
+  <!-- Left hand -->
+  <g transform="translate(68,280) scale(0.9)">
+    <!-- palm -->
+    <path d="M120 280 L88 220 C76 196 64 160 76 132 C88 104 120 96 140 112 L168 144
+             C182 160 188 188 176 208 L148 260 C140 276 126 284 120 280 Z"
+          fill="none" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- thumb and fingers -->
+    <path d="M52 180 C52 150 80 140 94 156" fill="none" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="44" y="272" width="120" height="48" rx="12" fill="none" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Right hand (mirrored) -->
+  <g transform="translate(432,280) scale(0.9)">
+    <path d="M528 280 L560 220 C572 196 584 160 572 132 C560 104 528 96 508 112 L480 144
+             C466 160 460 188 472 208 L500 260 C508 276 522 284 528 280 Z"
+          transform="translate(-400,0)" fill="none" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M664 180 C664 150 636 140 622 156" transform="translate(-400,0)" fill="none" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="344" y="272" width="120" height="48" rx="12" transform="translate(-400,0)" fill="none" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Central circle base under flame -->
+  <circle cx="384" cy="300" r="84" fill="#FFFFFF"/>
+  <circle cx="384" cy="300" r="68" fill="#E9572A"/>
+</svg>
