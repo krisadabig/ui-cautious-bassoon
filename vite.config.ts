@@ -9,6 +9,7 @@ export default defineConfig({
 		sveltekit(),
 		devtoolsJson()
 	],
+	base: process.env.NODE_ENV === 'production' ? '/your-repo-name' : '/',
 	server: {
 		proxy: {
 			'/api': {

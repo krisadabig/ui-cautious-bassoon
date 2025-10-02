@@ -3,6 +3,8 @@
   import { Toaster } from 'svelte-sonner';
   
   export let data: { session: any };
+
+  export const prerender = true;
 </script>
 
 <svelte:head>
