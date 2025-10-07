@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { base } from '$app/paths';
 	import { page } from '$app/stores';
 
 	$: status = $page.status; // e.g., 404
@@ -13,10 +14,10 @@
 	<h1>{status}</h1>
 	{#if status === 404}
 		<p>Oops! The page you're looking for doesn't exist.</p>
-		<a href="/">Go home</a>
+		<a href="{base}/">Go home</a>
 	{:else}
 		<p>Something went wrong: {error?.message}</p>
-		<a href="/">Go home</a>
+		<a href="{base}/">Go home</a>
 	{/if}
 </div>
 
