@@ -9,7 +9,6 @@ export default defineConfig({
 		sveltekit(),
 		devtoolsJson()
 	],
-	base: process.env.NODE_ENV === 'production' ? '/ui-cautious-bassoon' : '/',
 	server: {
 		proxy: {
 			'/api': {
