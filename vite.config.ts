@@ -9,11 +9,11 @@ export default defineConfig({
 		sveltekit(),
 		devtoolsJson()
 	],
-	base: process.env.NODE_ENV === 'production' ? '/your-repo-name' : '/',
+	base: process.env.NODE_ENV === 'production' ? '/ui-cautious-bassoon' : '/',
 	server: {
 		proxy: {
 			'/api': {
-				target: 'http://localhost:8080',
+				target: process.env.VITE_BACKEND_URL,
 				changeOrigin: true,
 				secure: false
 			}

@@ -1,6 +1,7 @@
 import { supabase } from './supabaseClient';
 import type { User } from '@supabase/supabase-js';
 import { goto } from '$app/navigation';
+import { resolve } from '$app/paths';
 
 export interface AuthHeaders extends Record<string, string> {
   Authorization: string;
@@ -56,7 +57,7 @@ export async function getAuthHeaders(): Promise<AuthHeaders | null> {
 export async function requireAuth(): Promise<AuthSession> {
   const session = await getAuthSession();
   if (!session) {
-    await goto('/');
+    await goto(resolve('/'));
     throw new Error('Not authenticated');
   }
   return session;
