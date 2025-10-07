@@ -13,7 +13,7 @@ const config = {
             // Output directory for assets (default: same as pages)
             assets: 'build',
             // Fallback page for SPA mode (e.g., '404.html' for GitHub Pages)
-            fallback: 'index.html', // Use '404.html' if you want a custom 404
+            fallback: '404.html', // Use '404.html' if you want a custom 404
             // Precompress assets (optional, for better performance)
             precompress: false,
             // Enforce strict prerendering (recommended for static sites)

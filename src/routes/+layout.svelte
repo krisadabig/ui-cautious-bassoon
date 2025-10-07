@@ -1,14 +1,14 @@
 <script lang="ts">
+	import { base } from '$app/paths';
   import '../app.css';
   import { Toaster } from 'svelte-sonner';
   
   export let data: { session: any };
 
-  // export const prerender = true;
 </script>
 
 <svelte:head>
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="{base}/favicon.ico" />
   <title>My App</title>
 </svelte:head>
 
