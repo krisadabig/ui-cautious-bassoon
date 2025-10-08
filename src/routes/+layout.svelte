@@ -1,16 +1,18 @@
 <script lang="ts">
-	import { base } from '$app/paths';
+  import { asset } from '$app/paths';
   import '../app.css';
   import { Toaster } from 'svelte-sonner';
   
-  export let data: { session: any };
-
+  const { data, children } = $props<{ 
+    data: { session: any },
+    children: (props: { data: any }) => any
+  }>();
 </script>
 
 <svelte:head>
-  <link rel="icon" type="image/x-icon" href="{base}/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href={asset('/favicon.ico')} />
   <title>My App</title>
 </svelte:head>
 
-<slot {data} />
+{@render children({ data })}
 <Toaster position="top-center" />

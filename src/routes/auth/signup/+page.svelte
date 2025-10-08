@@ -2,6 +2,7 @@
   import { goto } from '$app/navigation';
   import { supabase } from '$lib/supabaseClient';
   import { toast } from 'svelte-sonner';
+  import { resolve } from '$app/paths';
   
   let email = '';
   let password = '';
@@ -32,7 +33,7 @@
       
       // Redirect to login after a short delay
       setTimeout(() => {
-        goto('/auth/login');
+        goto(resolve('/auth/login'));
       }, 3000);
       
     } catch (err) {
@@ -45,7 +46,7 @@
   }
 
   function handleSignIn() {
-    goto('/auth/login');
+    goto(resolve('/auth/login'));
   }
 </script>
 

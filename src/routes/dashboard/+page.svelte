@@ -5,6 +5,7 @@
   import { apiClient } from '$lib/api';
   import { toast } from 'svelte-sonner';
   import { fly, fade } from 'svelte/transition';
+	import { resolve } from '$app/paths';
   
   interface Item {
     id: number;
@@ -157,7 +158,7 @@
     try {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
-      await goto('/');
+      await goto(resolve('/'));
     } catch (err) {
       console.error('Error signing out:', err);
       toast.error('Failed to sign out');

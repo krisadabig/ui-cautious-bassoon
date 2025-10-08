@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { goto } from '$app/navigation';
   import { supabase } from '$lib/supabaseClient';
+	import { resolve } from '$app/paths';
 
   onMount(async () => {
     // Check if user is already authenticated
@@ -32,11 +33,11 @@
   }
 
   function goToLogin() {
-    goto('/auth/login');
+    goto(resolve('/auth/login'));
   }
 
   function goToSignup() {
-    goto('/auth/signup');
+    goto(resolve('/auth/signup'));
   }
 </script>
 
