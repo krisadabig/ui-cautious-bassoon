@@ -3,13 +3,14 @@ import { getAuthHeaders } from './auth';
 import { goto } from '$app/navigation';
 import { resolve } from '$app/paths';
 
-// Create axios instance with proper configuration for proxy
+// Create axios instance with backend URL from environment variables
 const axiosInstance = axios.create({
-  baseURL: '', // Use relative URLs with proxy
-  withCredentials: false, // Important for proxy to work correctly
+  baseURL: import.meta.env.VITE_BACKEND_URL || '',
+  withCredentials: true, // Enable if using cookies/sessions
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
-
-// const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 export interface Item {
   id: number;
