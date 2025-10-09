@@ -3,13 +3,10 @@ import { getAuthHeaders } from './auth';
 import { goto } from '$app/navigation';
 import { resolve } from '$app/paths';
 
-// Create axios instance with backend URL from environment variables
-console.log("before: ", import.meta.env.VITE_BACKEND_URL)
-console.log("NODE_ENV: ", process.env.NODE_ENV)
 console.log("IMPORT NODE_ENV: ", import.meta.env.NODE_ENV)
-console.log("import VITE_BACKEND_URL: ", import.meta.env.VITE_BACKEND_URL)
-console.log("VITE_BACKEND_URL: ", process.env.VITE_BACKEND_URL)
+console.log("VITE_BACKEND_URL: ", import.meta.env.VITE_BACKEND_URL)
 
+// Create axios instance with backend URL from environment variables
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL || '',
   withCredentials: true, // Enable if using cookies/sessions
