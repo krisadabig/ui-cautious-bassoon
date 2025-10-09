@@ -19,7 +19,6 @@ const axiosInstance = axios.create({
   },
 });
 
-console.log("axios: ", inspect(axiosInstance, false, 2, true))
 
 const apiV1 = '/api/v1';
 
@@ -57,6 +56,7 @@ class ApiClient {
 
   async getItems(params?: { all?: string }): Promise<{ data: Item[] }> {
     const headers = await this.getHeaders();
+    console.log("axios: ", inspect(axiosInstance, false, 2, true))
     const response: AxiosResponse<{ data: Item[] }> = await axiosInstance.get(`${apiV1}/items`, {
       headers,
       params,
