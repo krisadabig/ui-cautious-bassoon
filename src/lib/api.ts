@@ -48,6 +48,9 @@ class ApiClient {
 
   async getItems(params?: { all?: string }): Promise<{ data: Item[] }> {
     const headers = await this.getHeaders();
+    console.log("NODE_ENV: ", process.env.NODE_ENV)
+    console.log("IMPORT NODE_ENV: ", import.meta.env.NODE_ENV)
+    console.log("VITE_BACKEND_URL: ", import.meta.env.VITE_BACKEND_URL)
     console.log("URL: ", axiosInstance.defaults.baseURL)
     const response: AxiosResponse<{ data: Item[] }> = await axiosInstance.get(`${apiV1}/items`, {
       headers,
