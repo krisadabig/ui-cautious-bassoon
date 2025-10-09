@@ -48,6 +48,7 @@ class ApiClient {
 
   async getItems(params?: { all?: string }): Promise<{ data: Item[] }> {
     const headers = await this.getHeaders();
+    console.log("URL: ", axiosInstance.defaults.baseURL)
     const response: AxiosResponse<{ data: Item[] }> = await axiosInstance.get(`${apiV1}/items`, {
       headers,
       params,
