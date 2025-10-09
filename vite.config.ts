@@ -9,15 +9,6 @@ export default defineConfig({
 		sveltekit(),
 		devtoolsJson()
 	],
-	server: {
-		proxy: {
-			'/api': {
-				target: process.env.VITE_BACKEND_URL,
-				changeOrigin: true,
-				secure: false
-			}
-		}
-	},
 	test: {
 		expect: { requireAssertions: true },
 		projects: [
