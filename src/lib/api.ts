@@ -2,7 +2,6 @@ import axios, { type AxiosResponse } from 'axios';
 import { getAuthHeaders } from './auth';
 import { goto } from '$app/navigation';
 import { resolve } from '$app/paths';
-import { inspect } from 'util';
 
 // Create axios instance with backend URL from environment variables
 console.log("before: ", import.meta.env.VITE_BACKEND_URL)
@@ -56,7 +55,7 @@ class ApiClient {
 
   async getItems(params?: { all?: string }): Promise<{ data: Item[] }> {
     const headers = await this.getHeaders();
-    console.log("axios: ", inspect(axiosInstance, false, 2, true))
+    console.log("axios: ", JSON.stringify(axiosInstance, null, 2))
     const response: AxiosResponse<{ data: Item[] }> = await axiosInstance.get(`${apiV1}/items`, {
       headers,
       params,
