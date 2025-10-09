@@ -12,6 +12,8 @@ const axiosInstance = axios.create({
   },
 });
 
+const apiV1 = '/api/v1';
+
 export interface Item {
   id: number;
   title: string;
@@ -46,7 +48,7 @@ class ApiClient {
 
   async getItems(params?: { all?: string }): Promise<{ data: Item[] }> {
     const headers = await this.getHeaders();
-    const response: AxiosResponse<{ data: Item[] }> = await axiosInstance.get(`/api/items`, {
+    const response: AxiosResponse<{ data: Item[] }> = await axiosInstance.get(`${apiV1}/items`, {
       headers,
       params,
     });
@@ -55,7 +57,7 @@ class ApiClient {
 
   async createItem(item: CreateItemRequest): Promise<Item> {
     const headers = await this.getHeaders();
-    const response: AxiosResponse<Item> = await axiosInstance.post(`/api/items`, item, {
+    const response: AxiosResponse<Item> = await axiosInstance.post(`${apiV1}/items`, item, {
       headers,
     });
     return response.data;
@@ -63,7 +65,7 @@ class ApiClient {
 
   async updateItem(id: number, item: UpdateItemRequest): Promise<Item> {
     const headers = await this.getHeaders();
-    const response: AxiosResponse<Item> = await axiosInstance.put(`/api/items/${id}`, item, {
+    const response: AxiosResponse<Item> = await axiosInstance.put(`${apiV1}/items/${id}`, item, {
       headers,
     });
     return response.data;
@@ -71,7 +73,7 @@ class ApiClient {
 
   async deleteItem(id: number): Promise<void> {
     const headers = await this.getHeaders();
-    await axiosInstance.delete(`/api/items/${id}`, {
+    await axiosInstance.delete(`${apiV1}/items/${id}`, {
       headers,
     });
   }
