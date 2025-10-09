@@ -30,9 +30,9 @@ jobs:
         env:
           PUBLIC_SUPABASE_URL: ${{ secrets.PUBLIC_SUPABASE_URL }}
           PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.PUBLIC_SUPABASE_ANON_KEY }}
-          VITE_BACKEND_URL: ${{ env.VITE_BACKEND_URL }}
+          VITE_BACKEND_URL: ${{ vars.VITE_BACKEND_URL }}
           BASE_PATH: '/ui-cautious-bassoon'  # If using subdirectory
-          NODE_ENV: ${{ env.NODE_ENV }}
+          NODE_ENV: ${{ vars.NODE_ENV }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
