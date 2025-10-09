@@ -4,6 +4,12 @@ import { goto } from '$app/navigation';
 import { resolve } from '$app/paths';
 
 // Create axios instance with backend URL from environment variables
+console.log("before: ", import.meta.env.VITE_BACKEND_URL)
+console.log("NODE_ENV: ", process.env.NODE_ENV)
+console.log("IMPORT NODE_ENV: ", import.meta.env.NODE_ENV)
+console.log("import VITE_BACKEND_URL: ", import.meta.env.VITE_BACKEND_URL)
+console.log("VITE_BACKEND_URL: ", process.env.VITE_BACKEND_URL)
+
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BACKEND_URL || '',
   withCredentials: true, // Enable if using cookies/sessions
@@ -48,11 +54,6 @@ class ApiClient {
 
   async getItems(params?: { all?: string }): Promise<{ data: Item[] }> {
     const headers = await this.getHeaders();
-    console.log("NODE_ENV: ", process.env.NODE_ENV)
-    console.log("IMPORT NODE_ENV: ", import.meta.env.NODE_ENV)
-    console.log("import VITE_BACKEND_URL: ", import.meta.env.VITE_BACKEND_URL)
-    console.log("VITE_BACKEND_URL: ", process.env.VITE_BACKEND_URL)
-    console.log("URL: ", axiosInstance.defaults.baseURL)
     const response: AxiosResponse<{ data: Item[] }> = await axiosInstance.get(`${apiV1}/items`, {
       headers,
       params,
