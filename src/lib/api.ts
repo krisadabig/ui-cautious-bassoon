@@ -2,6 +2,7 @@ import axios, { type AxiosResponse } from 'axios';
 import { getAuthHeaders } from './auth';
 import { goto } from '$app/navigation';
 import { resolve } from '$app/paths';
+import { inspect } from 'util';
 
 // Create axios instance with backend URL from environment variables
 console.log("before: ", import.meta.env.VITE_BACKEND_URL)
@@ -17,6 +18,8 @@ const axiosInstance = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+console.log("axios: ", inspect(axiosInstance, false, 2, true))
 
 const apiV1 = '/api/v1';
 
