@@ -5,7 +5,7 @@ import { resolve } from '$app/paths';
 
 // Create axios instance with backend URL from environment variables
 const axiosInstance = axios.create({
-  baseURL: process.env.VITE_BACKEND_URL || '',
+  baseURL: import.meta.env.VITE_BACKEND_URL || '',
   withCredentials: true, // Enable if using cookies/sessions
   headers: {
     'Content-Type': 'application/json',
