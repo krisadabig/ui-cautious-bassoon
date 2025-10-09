@@ -56,6 +56,7 @@ class ApiClient {
     const response: AxiosResponse<{ data: Item[] }> = await axiosInstance.get(`${apiV1}/items`, {
       headers,
       params,
+      withCredentials: true,
     });
     return response.data;
   }
