@@ -35,6 +35,7 @@ export interface CreateItemRequest {
 export interface UpdateItemRequest {
   title?: string;
   description?: string;
+  id: number;
 }
 
 /**
@@ -50,10 +51,9 @@ class ApiClient {
     return headers;
   }
 
-  async getItems(params?: { all?: string }): Promise<{ data: Item[] }> {
+  async getItems(params?: { all?: string }): Promise<Item[]> {
     const headers = await this.getHeaders();
-    console.log("axios: ", JSON.stringify(axiosInstance, null, 2))
-    const response: AxiosResponse<{ data: Item[] }> = await axiosInstance.get(`${apiV1}/items`, {
+    const response: AxiosResponse<Item[]> = await axiosInstance.get(`${apiV1}/items`, {
       headers,
       params,
       withCredentials: true,
@@ -69,9 +69,9 @@ class ApiClient {
     return response.data;
   }
 
-  async updateItem(id: number, item: UpdateItemRequest): Promise<Item> {
+  async updateItem(item: UpdateItemRequest): Promise<Item> {
     const headers = await this.getHeaders();
-    const response: AxiosResponse<Item> = await axiosInstance.put(`${apiV1}/items/${id}`, item, {
+    const response: AxiosResponse<Item> = await axiosInstance.put(`${apiV1}/items`, item, {
       headers,
     });
     return response.data;

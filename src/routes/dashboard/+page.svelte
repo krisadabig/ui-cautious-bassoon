@@ -17,23 +17,24 @@
   }
 
   // State
-  let items: Item[] = [];
-  let loading = true;
+  let items: Item[] = $state<Item[]>([])
+
+  let loading = $state<boolean>(true);
   
   // Skeleton items for loading state
   const skeletonItems = Array(3).fill({});
-  let isSubmitting = false;
-  let isDeleting = false;
-  let deletingId: number | null = null;
-  let showForm = false;
-  let editingId: number | null = null;
-  let showAllItems = false;
-  let formData = {
+  let isSubmitting = $state<boolean>(false);
+  let isDeleting = $state<boolean>(false);
+  let deletingId: number | null = $state<number | null>(null);
+  let showForm = $state<boolean>(false);
+  let editingId: number | null = $state<number | null>(null);
+  let showAllItems = $state<boolean>(false);
+  let formData = $state({
     title: '',
     description: ''
-  };
-  let user: any = null;
-  let error: string | null = null;
+  });
+  let user: any = $state(null);
+  let error: string | null = $state(null);
 
   // Initialize component
   onMount(async () => {
@@ -61,7 +62,8 @@
       loading = true;
       const params = showAllItems ? { all: 'true' } : {};
       const res = await apiClient.getItems(params);
-      items = res.data || [];
+      console.log("res: ", res)
+      items = res || [];
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Failed to load items';
       toast.error(message);
@@ -105,7 +107,7 @@
       isSubmitting = true;
       if (editingId !== null) {
         // Pass editingId directly as a number
-        const updatedItem = await apiClient.updateItem(editingId, formData);
+        const updatedItem = await apiClient.updateItem({ ...formData, id: editingId });
         const currentEditingId = editingId; // Capture the current editingId
         items = items.map(item => item.id === currentEditingId ? updatedItem : item);
         toast.success('Item updated successfully');
@@ -187,7 +189,7 @@
           <div class="flex items-center space-x-2">
             <p class="text-sm text-gray-600">{user?.email}</p>
             <button
-              on:click={signOut}
+              onclick={signOut}
               class="px-4 py-2 bg-red-600 text-white text-sm font-medium rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200 flex items-center"
               aria-label="Sign out"
             >
@@ -247,7 +249,7 @@
       <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
         <span class="block sm:inline">{error}</span>
         <button
-          on:click={() => error = ''}
+          onclick={() => error = ''}
           class="absolute top-0 bottom-0 right-0 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 rounded"
           aria-label="Dismiss error message"
         >
@@ -262,7 +264,7 @@
     <!-- Create Item Button -->
     <div class="mb-4 sm:mb-6 flex justify-end">
       <button
-        on:click={() => { showForm = !showForm; if (!showForm) resetForm(); }}
+        onclick={() => { showForm = !showForm; if (!showForm) resetForm(); }}
         class="fixed bottom-6 right-6 sm:static z-10 bg-indigo-600 hover:bg-indigo-700 text-white p-3 sm:px-4 sm:py-2 rounded-full sm:rounded-md text-sm font-medium inline-flex items-center shadow-lg sm:shadow-md transform transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         aria-label={showForm ? 'Cancel' : 'Add new item'}
       >
@@ -284,7 +286,7 @@
     {#if showForm && !editingId}
       <div class="bg-white shadow rounded-lg p-6 mb-6" transition:fly={{ y: -20, duration: 200 }}>
         <h2 class="text-lg font-medium text-gray-900 mb-4">Create New Item</h2>
-        <form on:submit|preventDefault={handleSubmit} class="space-y-4">
+        <form onsubmit={handleSubmit} class="space-y-4">
           <div class="grid grid-cols-1 gap-6">
             <div class="space-y-2">
               <label for="title" class="block text-base font-medium text-gray-700">Title *</label>
@@ -326,7 +328,7 @@
             </button>
             <button
               type="button"
-              on:click={() => { showForm = false; resetForm(); }}
+              onclick={() => { showForm = false; resetForm(); }}
               class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Cancel
@@ -347,7 +349,7 @@
               </h2>
               <button 
                 type="button" 
-                on:click={toggleShowAll}
+                onclick={toggleShowAll}
                 class="text-xs px-2 py-1 rounded-md bg-gray-100 hover:bg-gray-200 text-gray-700 transition-colors"
                 title={showAllItems ? 'Show only my items' : 'Show all items'}
               >
@@ -375,7 +377,7 @@
             {#each items as item (item.id)}
               <div class="border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors duration-150">
                 {#if editingId === item.id}
-                  <form on:submit|preventDefault={handleSubmit} class="p-6 space-y-6">
+                  <form onsubmit={handleSubmit} class="p-6 space-y-6">
                     <h3 class="text-lg font-medium text-gray-900">Edit Item</h3>
                     <div class="space-y-2">
                       <label for="edit-title-{item.id}" class="block text-base font-medium text-gray-700">Title</label>
@@ -419,7 +421,7 @@
                       </button>
                       <button
                         type="button"
-                        on:click={cancelEdit}
+                        onclick={cancelEdit}
                         class="flex-1 sm:flex-none inline-flex justify-center items-center px-5 py-2.5 border border-gray-300 shadow-sm text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-150"
                         aria-label="Cancel editing"
                       >
@@ -445,7 +447,7 @@
                     </div>
                     <div class="flex space-x-2 ml-4">
                       <button
-                        on:click={() => startEdit(item)}
+                        onclick={() => startEdit(item)}
                         class="p-2 sm:px-4 sm:py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-150 flex items-center"
                         aria-label={`Edit ${item.title}`}
                         title="Edit item"
@@ -456,7 +458,7 @@
                         <span class="hidden sm:inline">Edit</span>
                       </button>
                       <button
-                        on:click={() => deleteItem(item.id)}
+                        onclick={() => deleteItem(item.id)}
                         class="p-2 sm:px-4 sm:py-2 bg-red-50 hover:bg-red-100 text-red-700 rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-150 flex items-center"
                         aria-label={`Delete ${item.title}`}
                         title="Delete item"
